@@ -1,0 +1,10 @@
+# Source files
+*.cpp            eol=lf
+*.h              eol=lf
+
+# Scripts
+*.sh             eol=lf
+
+# Build files
+*.cmake          eol=lf
+CMakeLists.txt   eol=lf
