@@ -15,23 +15,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <utils/Dictionary.h>
 
-#include <iostream>
+#ifndef _DICTIONARY_
+# define _DICTIONARY_
 
-int main(void)
+# include "GraphNode.h"
+
+# include <set>
+
+namespace utils {
+
+class Dictionary
 {
-    // Just a little test for now
-    std::set<char> alphabet = { 'a', 'b', 'c' };
+public:
+    using NodeType = GraphNode<char>::Ptr;
 
-    ::utils::Dictionary dict(alphabet);
+    // Keep the compiler from generating default ctor
+    Dictionary() = delete;
+    Dictionary(const std::set<char>& alphabet);
+    ~Dictionary() = default;
 
-    dict.addEntry("abbaa");
-    dict.addEntry("aba");
-    dict.addEntry("aaba");
-    dict.addEntry("aababa");
+    bool addEntry(const std::string& entry);
 
-    std::cout << dict.toString() << std::endl;
+    std::string toString() const;
 
-    return 0;
-}
+private:
+    NodeType _head;
+    const std::set<char>& _alphabet;
+};
+
+} // namespace utils
+
+#endif /* !_DICTIONARY_ */
