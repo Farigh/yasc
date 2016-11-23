@@ -36,6 +36,7 @@ public:
     ~Dictionary() = default;
 
     bool addEntry(const std::string& entry);
+    bool safeAddEntry(const std::string& entry);
 
     std::string toString() const;
 

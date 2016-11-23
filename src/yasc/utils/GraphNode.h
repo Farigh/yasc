@@ -19,6 +19,7 @@
 #ifndef _GRAPH_NODE_
 # define _GRAPH_NODE_
 
+# include <map>
 # include <memory>
 # include <sstream>
 # include <unordered_map>
@@ -101,7 +102,10 @@ public:
             isFirstPrint = false;
         }
 
-        for (const typename TransitionsType::value_type& t : _transitions)
+        // Order transitions for printing
+        std::map<KeyType, Ptr> sortedTransitions;
+        sortedTransitions.insert(_transitions.begin(), _transitions.end());
+        for (const typename TransitionsType::value_type& t : sortedTransitions)
         {
             if (isFirstPrint)
             {

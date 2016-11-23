@@ -36,11 +36,13 @@ Dictionary::Dictionary(const std::set<char>& alphabet)
 
 /**
  * @brief This function adds an entry to the dictionary
+ * It will not check for it's validity before adding new nodes, if the entry was not valid
+ * the dictionnary might get corrupted.
  * @return returns true if the entry is valid (according to the alphabet), false otherwhise
  */
 bool Dictionary::addEntry(const std::string& entry)
 {
-    bool result = true;
+    bool isValidEntry = true;
 
     NodeType currentNode = _head;
     for (const char& c : entry)
@@ -51,7 +53,7 @@ bool Dictionary::addEntry(const std::string& entry)
         // Invalid transition type, return false
         if (_alphabet.find(currentChar) == _alphabet.end())
         {
-            result = false;
+            isValidEntry = false;
             break;
         }
 
@@ -65,13 +67,44 @@ bool Dictionary::addEntry(const std::string& entry)
     }
 
     // The last node added is the output
-    if (!currentNode->IsOutput())
+    if (isValidEntry && !currentNode->IsOutput())
     {
         currentNode->SetOutput(true);
     }
 
-    return result;
+    return isValidEntry;
 }
+
+/**
+ * @brief This function adds an entry to the dictionary only if it's a valid one
+ * @return returns true if the entry is valid (according to the alphabet), false otherwhise
+ */
+bool Dictionary::safeAddEntry(const std::string& entry)
+{
+    bool isValidEntry = true;
+
+    // Check entry validity
+    for (const char& c : entry)
+    {
+        // Convert to lower-case first
+        const char currentChar = std::tolower(c, std::locale());
+
+        // Invalid transition type, return false
+        if (_alphabet.find(currentChar) == _alphabet.end())
+        {
+            isValidEntry = false;
+            break;
+        }
+    }
+
+    if (isValidEntry)
+    {
+        addEntry(entry);
+    }
+
+    return isValidEntry;
+}
+
 /**
  * @brief This function create a string representing the current graph
  * @return returns the constructed string
