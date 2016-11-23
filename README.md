@@ -27,3 +27,12 @@ This has kept me thinking since and I have many ideas. I basically came out with
 ## Objectives
 For now on, the prime goal of this project is to put together every idea I have on the subject, experiment and produce a working program.
 I do not intend to do any research on the subject as for now, maybe in a second phase, once I'm confortable with what I did on my own.
+
+## Cloning this project
+
+Use the git clone command provided by GitHub.
+This project contains submodules, you need to run the following commands to pull them:
+```
+$ git submodule init
+$ git submodule update
+```

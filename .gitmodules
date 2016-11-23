@@ -1,0 +1,3 @@
+[submodule "src/third_party/cppunit"]
+	path = src/third_party/cppunit
+	url = git://anongit.freedesktop.org/git/libreoffice/cppunit/
