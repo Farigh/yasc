@@ -23,7 +23,7 @@
 int main (int argc, char* argv[])
 {
     bool returnValue = 1;
-    ::tests::helpers::YascTestSuiteManager unitTestRunner;
+    ::yasc::tests::helpers::YascTestSuiteManager unitTestRunner;
     if (argc > 2)
     {
         std::cerr << "Error: too many aruments" << std::endl;

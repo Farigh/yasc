@@ -36,6 +36,7 @@
 
 # include <string>
 
+namespace yasc {
 namespace tests {
 namespace helpers {
 
@@ -53,7 +54,8 @@ private:
     CppUnit::TestResultCollector* _resultCollector;
 };
 
-} // namespace tests
 } // namespace helpers
+} // namespace tests
+} // namespace yasc
 
 #endif /* !_YASC_TEST_RUNNER_H_ */

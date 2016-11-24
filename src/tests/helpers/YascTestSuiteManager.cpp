@@ -34,6 +34,7 @@
 
 #include <sstream>
 
+namespace yasc {
 namespace tests {
 namespace helpers {
 
@@ -103,5 +104,6 @@ bool YascTestSuiteManager::runTestByName(const std::string& testName) const
     return runCppUnitTest(_allTests->findTest(testName));
 }
 
-} // namespace tests
 } // namespace helpers
+} // namespace tests
+} // namespace yasc

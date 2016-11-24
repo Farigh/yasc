@@ -23,6 +23,7 @@
 # include <sstream>
 # include <unordered_map>
 
+namespace yasc {
 namespace utils {
 
 template <typename KeyType>
@@ -128,5 +129,6 @@ private:
 };
 
 } // namespace utils
+} // namespace yasc
 
 #endif /* !_GRAPH_NODE_H_ */

@@ -22,6 +22,7 @@
 
 # include <set>
 
+namespace yasc {
 namespace utils {
 
 class Dictionary
@@ -45,5 +46,6 @@ private:
 };
 
 } // namespace utils
+} // namespace yasc
 
 #endif /* !_DICTIONARY_H_ */

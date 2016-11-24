@@ -17,6 +17,7 @@
  */
 #include "YascTestRunner.h"
 
+namespace yasc {
 namespace tests {
 namespace helpers {
 
@@ -42,5 +43,6 @@ bool YascTestRunner::runTests()
     return _resultCollector->wasSuccessful();
 }
 
-} // namespace tests
 } // namespace helpers
+} // namespace tests
+} // namespace yasc

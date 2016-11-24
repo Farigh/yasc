@@ -22,6 +22,7 @@
 
 # include <string>
 
+namespace yasc {
 namespace tests {
 namespace helpers {
 
@@ -38,7 +39,8 @@ private:
     CppUnit::Test* _allTests;
 };
 
-} // namespace tests
 } // namespace helpers
+} // namespace tests
+} // namespace yasc
 
 #endif /* !_YASC_TEST_SUITE_MANAGER_H_ */

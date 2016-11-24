@@ -21,6 +21,8 @@
 
 #include <sstream>
 
+namespace yasc {
+
 // Register test suite
 CPPUNIT_TEST_SUITE_REGISTRATION(DictionaryTest);
 
@@ -29,7 +31,7 @@ void DictionaryTest::AddValidEntityTest()
     // Create dictionary with 3 letters alphabet
     std::set<char> alphabet = { 'a', 'b', 'c' };
 
-    ::utils::Dictionary dict(alphabet);
+    ::yasc::utils::Dictionary dict(alphabet);
 
     // Adding a valid entry should return true
     CPPUNIT_ASSERT(dict.addEntry("abbaa"));
@@ -46,7 +48,7 @@ void DictionaryTest::AddInvalidEntityTest()
     // Create dictionary with 3 letters alphabet
     std::set<char> alphabet = { 'a', 'b', 'c' };
 
-    ::utils::Dictionary dict(alphabet);
+    ::yasc::utils::Dictionary dict(alphabet);
 
     // Adding an invalid entry (contains z, which is not in the distionary) should return false
     CPPUNIT_ASSERT(!dict.safeAddEntry("abbza"));
@@ -62,7 +64,7 @@ void DictionaryTest::AddEntityComplexTest()
     // Create dictionary with 3 letters alphabet
     std::set<char> alphabet = { 'a', 'b', 'c' };
 
-    ::utils::Dictionary dict(alphabet);
+    ::yasc::utils::Dictionary dict(alphabet);
 
     // === Adding a valid entry should return true
     CPPUNIT_ASSERT(dict.addEntry("abbaa"));
@@ -112,3 +114,5 @@ void DictionaryTest::AddEntityComplexTest()
                     << " -> b -> a -> c -> b -> a -> c -> []" << std::endl;
     CPPUNIT_ASSERT_EQUAL(expectedOutput4.str(), dict.toString());
 }
+
+} // namespace yasc

@@ -20,6 +20,8 @@
 
 # include <helpers/CppUnitHelperMacrosWrapper.h>
 
+namespace yasc {
+
 class DictionaryTest : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(DictionaryTest);
@@ -33,5 +35,7 @@ public:
     void AddInvalidEntityTest();
     void AddEntityComplexTest();
 };
+
+} // namespace yasc
 
 #endif /* !_DICTIONARY_TEST_H_ */

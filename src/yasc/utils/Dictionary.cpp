@@ -19,6 +19,7 @@
 
 #include <locale>
 
+namespace yasc {
 namespace utils {
 
 /**
@@ -114,3 +115,4 @@ std::string Dictionary::toString() const
 }
 
 } // namespace utils
+} // namespace yasc
