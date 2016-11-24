@@ -15,9 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-#ifndef _DICTIONARY_
-# define _DICTIONARY_
+#ifndef _DICTIONARY_H_
+# define _DICTIONARY_H_
 
 # include "GraphNode.h"
 
@@ -47,4 +46,4 @@ private:
 
 } // namespace utils
 
-#endif /* !_DICTIONARY_ */
+#endif /* !_DICTIONARY_H_ */

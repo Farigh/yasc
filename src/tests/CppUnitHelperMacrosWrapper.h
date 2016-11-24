@@ -15,17 +15,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef _CPPUNIT_HELPER_MACROS_WRAPPER_H_
+# define _CPPUNIT_HELPER_MACROS_WRAPPER_H_
 
-#ifdef __GNUC__
+# ifdef __GNUC__
 // Disable CppUnit warnings (third-party)
-# pragma GCC diagnostic push
-# pragma GCC diagnostic ignored "-Wold-style-cast"
-# pragma GCC diagnostic ignored "-Wsuggest-override"
-#endif
+#  pragma GCC diagnostic push
+#  pragma GCC diagnostic ignored "-Wold-style-cast"
+#  pragma GCC diagnostic ignored "-Wsuggest-override"
+# endif
 
-#include <cppunit/extensions/HelperMacros.h>
+# include <cppunit/extensions/HelperMacros.h>
 
-#ifdef __GNUC__
+# ifdef __GNUC__
 // Restore warnings
-# pragma GCC diagnostic pop
-#endif
+#  pragma GCC diagnostic pop
+# endif
+
+#endif /* !_CPPUNIT_HELPER_MACROS_WRAPPER_H_ */

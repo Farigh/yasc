@@ -15,9 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-#ifndef _GRAPH_NODE_
-# define _GRAPH_NODE_
+#ifndef _GRAPH_NODE_H_
+# define _GRAPH_NODE_H_
 
 # include <map>
 # include <memory>
@@ -102,7 +101,7 @@ public:
             isFirstPrint = false;
         }
 
-        // Order transitions for printing
+        // Sort transitions for printing
         std::map<KeyType, Ptr> sortedTransitions;
         sortedTransitions.insert(_transitions.begin(), _transitions.end());
         for (const typename TransitionsType::value_type& t : sortedTransitions)
@@ -130,4 +129,4 @@ private:
 
 } // namespace utils
 
-#endif /* !_GRAPH_NODE_ */
+#endif /* !_GRAPH_NODE_H_ */

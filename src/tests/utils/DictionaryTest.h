@@ -15,6 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef _DICTIONARY_TEST_H_
+# define _DICTIONARY_TEST_H_
+
 #include <CppUnitHelperMacrosWrapper.h>
 
 class DictionaryTest : public CppUnit::TestFixture
@@ -31,3 +34,4 @@ public:
     void AddEntityComplexTest();
 };
 
+#endif /* !_DICTIONARY_TEST_H_ */
