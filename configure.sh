@@ -11,15 +11,28 @@ if [ ! -d "./$BUILD_DIR" ]; then
     mkdir $BUILD_DIR
 fi
 
-
 # Configure project
 cd $BUILD_DIR
 cmake -G "$CMAKE_GENERATOR" -DCMAKE_BUILD_TYPE=$BUILD_TYPE $CMAKE_OPTIONS ..
+cd -
 
 if [ $? -eq 0 ]; then
     echo "Project configured successfully."
+
+    echo -n "Generating root Makefile..."
+    cat <<EOF > Makefile
+.SILENT:
+
+all:
+	cmake --build $BUILD_DIR
+
+%:
+	make -C $BUILD_DIR \$*
+
+EOF
+    echo "Done"
     echo "To build the project, use the following command:"
-    echo "  cmake --build $BUILD_DIR"
+    echo '   $ make'
 else
     echo "Project configuration failed.";
 fi

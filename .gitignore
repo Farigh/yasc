@@ -32,7 +32,8 @@
 *.app
 
 #####################################
-###      Custom cofiguration      ###
+###      Custom configuration     ###
 #####################################
+Makefile
 build/
 out/
