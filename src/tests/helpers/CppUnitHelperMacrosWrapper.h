@@ -15,23 +15,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _DICTIONARY_TEST_H_
-# define _DICTIONARY_TEST_H_
+#ifndef _CPPUNIT_HELPER_MACROS_WRAPPER_H_
+# define _CPPUNIT_HELPER_MACROS_WRAPPER_H_
 
-#include <CppUnitHelperMacrosWrapper.h>
+# ifdef __GNUC__
+// Disable CppUnit warnings (third-party)
+#  pragma GCC diagnostic push
+#  pragma GCC diagnostic ignored "-Wold-style-cast"
+#  pragma GCC diagnostic ignored "-Wsuggest-override"
+# endif
 
-class DictionaryTest : public CppUnit::TestFixture
-{
-    CPPUNIT_TEST_SUITE(DictionaryTest);
-        CPPUNIT_TEST(AddValidEntityTest);
-        CPPUNIT_TEST(AddInvalidEntityTest);
-        CPPUNIT_TEST(AddEntityComplexTest);
-    CPPUNIT_TEST_SUITE_END();
+# include <cppunit/extensions/HelperMacros.h>
 
-public:
-    void AddValidEntityTest();
-    void AddInvalidEntityTest();
-    void AddEntityComplexTest();
-};
+# ifdef __GNUC__
+// Restore warnings
+#  pragma GCC diagnostic pop
+# endif
 
-#endif /* !_DICTIONARY_TEST_H_ */
+#endif /* !_CPPUNIT_HELPER_MACROS_WRAPPER_H_ */

@@ -13,7 +13,9 @@ if [ -t 1 ]; then
     LIGHT_GREEN=$(echo -e '\e[1;32m')
     PURPLE=$(echo -e '\e[0;35m')
     CYAN=$(echo -e '\e[0;36m')
-fi;
+fi
+
+echo ""
 
 total_test_failed=0
 total_test_succeeded=0

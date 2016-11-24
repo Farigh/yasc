@@ -14,8 +14,11 @@ link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
 add_executable(
     ${TEST_NAME}
+    EXCLUDE_FROM_ALL
     main.cpp
-    utils/DictionaryTest.cpp
+    helpers/YascTestSuiteManager.cpp
+    helpers/YascTestRunner.cpp
+    tests/utils/DictionaryTest.cpp
 )
 
 # Add needed libs
@@ -27,7 +30,18 @@ target_link_libraries(
 
 add_dependencies(${TEST_NAME} build-cppunit ${PROJECT_NAME})
 
-# Add test target
+# Allow test reserved target overload
+if(POLICY CMP0037)
+    cmake_policy(PUSH)
+    cmake_policy(SET CMP0037 OLD)
+endif(POLICY CMP0037)
+
+# Add custom test target
 add_custom_target(test
                   COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/unit_test_runner.sh ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${TEST_NAME}
                   DEPENDS ${TEST_NAME})
+
+# Restore policy
+if(POLICY CMP0037)
+    cmake_policy(POP)
+endif(POLICY CMP0037)

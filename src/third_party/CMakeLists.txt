@@ -8,3 +8,6 @@ ExternalProject_Add(
     CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/cppunit/autogen.sh COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/cppunit/configure --prefix=${CMAKE_OUTPUT_DIRECTORY}
     BUILD_COMMAND ${MAKE}
 )
+
+# Only build cppunit if needed
+set_target_properties(build-cppunit PROPERTIES EXCLUDE_FROM_ALL TRUE)
