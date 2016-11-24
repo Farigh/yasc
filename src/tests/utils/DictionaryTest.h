@@ -15,12 +15,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <utils/Dictionary.h>
+#include <CppUnitHelperMacrosWrapper.h>
 
-#include <iostream>
-
-int main(void)
+class DictionaryTest : public CppUnit::TestFixture
 {
-    // Don't do anything for now
-    return 0;
-}
+    CPPUNIT_TEST_SUITE(DictionaryTest);
+        CPPUNIT_TEST(AddValidEntityTest);
+        CPPUNIT_TEST(AddInvalidEntityTest);
+        CPPUNIT_TEST(AddEntityComplexTest);
+    CPPUNIT_TEST_SUITE_END();
+
+public:
+    void AddValidEntityTest();
+    void AddInvalidEntityTest();
+    void AddEntityComplexTest();
+};
+
