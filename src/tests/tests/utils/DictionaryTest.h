@@ -28,12 +28,14 @@ class DictionaryTest : public CppUnit::TestFixture
         CPPUNIT_TEST(AddValidEntityTest);
         CPPUNIT_TEST(AddInvalidEntityTest);
         CPPUNIT_TEST(AddEntityComplexTest);
+        CPPUNIT_TEST(CheckEntityExistenceTest);
     CPPUNIT_TEST_SUITE_END();
 
 public:
     void AddValidEntityTest();
     void AddInvalidEntityTest();
     void AddEntityComplexTest();
+    void CheckEntityExistenceTest();
 };
 
 } // namespace yasc

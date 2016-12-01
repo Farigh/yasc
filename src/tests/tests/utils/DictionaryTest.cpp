@@ -19,6 +19,7 @@
 
 #include <utils/Dictionary.h>
 
+#include <list>
 #include <sstream>
 
 namespace yasc {
@@ -29,7 +30,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(DictionaryTest);
 void DictionaryTest::AddValidEntityTest()
 {
     // Create dictionary with 3 letters alphabet
-    std::set<char> alphabet = { 'a', 'b', 'c' };
+    const std::set<char> alphabet = { 'a', 'b', 'c' };
 
     ::yasc::utils::Dictionary dict(alphabet);
 
@@ -46,7 +47,7 @@ void DictionaryTest::AddValidEntityTest()
 void DictionaryTest::AddInvalidEntityTest()
 {
     // Create dictionary with 3 letters alphabet
-    std::set<char> alphabet = { 'a', 'b', 'c' };
+    const std::set<char> alphabet = { 'a', 'b', 'c' };
 
     ::yasc::utils::Dictionary dict(alphabet);
 
@@ -62,7 +63,7 @@ void DictionaryTest::AddInvalidEntityTest()
 void DictionaryTest::AddEntityComplexTest()
 {
     // Create dictionary with 3 letters alphabet
-    std::set<char> alphabet = { 'a', 'b', 'c' };
+    const std::set<char> alphabet = { 'a', 'b', 'c' };
 
     ::yasc::utils::Dictionary dict(alphabet);
 
@@ -113,6 +114,48 @@ void DictionaryTest::AddEntityComplexTest()
                     << "                          -> c -> c -> []" << std::endl
                     << " -> b -> a -> c -> b -> a -> c -> []" << std::endl;
     CPPUNIT_ASSERT_EQUAL(expectedOutput4.str(), dict.toString());
+}
+
+void DictionaryTest::CheckEntityExistenceTest()
+{
+    // Create dictionary with 3 letters alphabet
+    const std::set<char> alphabet = { 'a', 'b', 'c' };
+
+    ::yasc::utils::Dictionary dict(alphabet);
+
+    // === Add some entries to the dictionary
+    const std::list<std::string> entries = { "abbaa", "abcba", "acbaabba" };
+    for (const std::string& entry : entries)
+    {
+        dict.addEntry(entry);
+    }
+
+    // === Check for existing values
+    for (const std::string& entry : entries)
+    {
+        CPPUNIT_ASSERT(dict.isExistingEntry(entry));
+    }
+
+    // Empty string is a valid one
+    CPPUNIT_ASSERT(dict.isExistingEntry(""));
+
+    // === Check for unknown entries
+    CPPUNIT_ASSERT(!dict.isExistingEntry("aaabccb"));
+
+    // Check with unknown char
+    CPPUNIT_ASSERT(!dict.isExistingEntry("jdi"));
+
+    // Check with existing prefix
+    for (const std::string& entry : entries)
+    {
+        CPPUNIT_ASSERT(!dict.isExistingEntry(entry + "cca"));
+    }
+
+    // Check with partial match
+    for (const std::string& entry : entries)
+    {
+        CPPUNIT_ASSERT(!dict.isExistingEntry(entry.substr(0, 3)));
+    }
 }
 
 } // namespace yasc

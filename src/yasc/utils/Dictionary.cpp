@@ -106,6 +106,32 @@ bool Dictionary::safeAddEntry(const std::string& entry)
 }
 
 /**
+ * @brief This function checks if the given @p entry is part of the dictionary
+ * @return returns true if the entry exists, false otherwhise
+ */
+bool Dictionary::isExistingEntry(const std::string& entry)
+{
+    bool entryExists = true;
+
+    NodeType currentNode = _head;
+    for (const char& c : entry)
+    {
+        // Convert to lower-case first
+        const char currentChar = std::tolower(c, std::locale());
+
+        NodeType tmpNode = currentNode->TryFollow(currentChar);
+        if (tmpNode == nullptr)
+        {
+            entryExists = false;
+            break;
+        }
+    }
+
+    // Entry exists if it can go through it's entire transitions and ends with an output node
+    return entryExists && currentNode->IsOutput();
+}
+
+/**
  * @brief This function create a string representing the current graph
  * @return returns the constructed string
  */

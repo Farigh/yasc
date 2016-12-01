@@ -37,6 +37,7 @@ public:
 
     bool addEntry(const std::string& entry);
     bool safeAddEntry(const std::string& entry);
+    bool isExistingEntry(const std::string& entry);
 
     std::string toString() const;
 
