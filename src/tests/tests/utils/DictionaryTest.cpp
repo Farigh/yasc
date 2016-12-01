@@ -76,6 +76,10 @@ void DictionaryTest::AddEntityComplexTest()
                    << " -> a -> b -> b -> a -> a -> []" << std::endl;
     CPPUNIT_ASSERT_EQUAL(expectedOutput.str(), dict.toString());
 
+    // === Adding a valid entry twice should return true and the dictionary should remain the same
+    CPPUNIT_ASSERT(dict.addEntry("abbaa"));
+    CPPUNIT_ASSERT_EQUAL(expectedOutput.str(), dict.toString());
+
     // === Adding an invalid entry (contains z, which is not in the distionary) should return false
     CPPUNIT_ASSERT(!dict.safeAddEntry("abbza"));
 
