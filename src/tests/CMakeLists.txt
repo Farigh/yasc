@@ -16,10 +16,15 @@ add_executable(
     ${TEST_NAME}
     EXCLUDE_FROM_ALL
     main.cpp
+
+    tests/DataManager.cpp
+
     # Helpers
     helpers/cppunit/YascTestSuiteManager.cpp
     helpers/cppunit/YascTestRunner.cpp
+
     # Tests
+    tests/utils/DictionaryFactoryTest.cpp
     tests/utils/DictionaryTest.cpp
     tests/utils/DynamicDictionaryTest.cpp
 )
@@ -41,7 +46,7 @@ endif(POLICY CMP0037)
 
 # Add custom test target
 add_custom_target(test
-                  COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/unit_test_runner.sh ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${TEST_NAME}
+                  COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/unit_test_runner.sh ${CMAKE_CURRENT_SOURCE_DIR}/resources ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${TEST_NAME}
                   DEPENDS ${TEST_NAME})
 
 # Restore policy

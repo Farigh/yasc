@@ -1,0 +1,7 @@
+this is a phrase
+with some
+more
+characters
+it is composed of chars
+any of which is a char
+right

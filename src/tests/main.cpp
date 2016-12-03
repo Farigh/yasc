@@ -16,18 +16,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <helpers/cppunit/YascTestSuiteManager.h>
+#include <tests/DataManager.h>
 
 #include <cstdint>
 #include <iostream>
+
+static void printUsage(const char* binName)
+{
+    std::cout << "Usage: " << binName << "<resource_path> [test_name]" << std::endl;
+}
 
 int main (int argc, char* argv[])
 {
     bool returnValue = 1;
     ::yasc::tests::helpers::cppunit::YascTestSuiteManager unitTestRunner;
-    if (argc > 2)
+    if (argc > 3)
     {
         std::cerr << "Error: too many aruments" << std::endl;
-        std::cout << "Usage: " << argv[0] << " [test_name]" << std::endl;
+        printUsage(argv[0]);
     }
     // Print tests
     else if ((argc == 2) && (std::string(argv[1]) == "-l"))
@@ -37,14 +43,25 @@ int main (int argc, char* argv[])
     // Run tests
     else
     {
-        // Select specific test if asked for
-        if (argc == 2)
+        // TODO: use getopts
+        if (argc < 2)
         {
-            returnValue = unitTestRunner.runTestByName(argv[1]);
+            std::cerr << "Error: missing resource path" << std::endl;
+            printUsage(argv[0]);
         }
         else
         {
-            returnValue = unitTestRunner.runAllTests();
+            ::yasc::tests::DataManager::setResourcePath(std::string(argv[1]));
+
+            // Select specific test if asked for
+            if (argc == 3)
+            {
+                returnValue = unitTestRunner.runTestByName(argv[2]);
+            }
+            else
+            {
+                returnValue = unitTestRunner.runAllTests();
+            }
         }
     }
 

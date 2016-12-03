@@ -1,8 +1,9 @@
 #! /bin/bash
 
-unit_test_runtime=$1
+unit_test_resources_path=$1
+unit_test_runtime=$2
 if [ "${unit_test_runtime}" == "" ]; then
-    echo "Usage: $0 <unit_test_runtime>"
+    echo "Usage: $0 <unit_test_resources_path> <unit_test_runtime>"
     exit 1
 fi
 
@@ -55,7 +56,7 @@ while read -r test_line; do
         echo "** Running test ${CYAN}${current_test_name}${RESET_COLOR}"
 
         # Actually run the test (add left-padding on the output)
-        $unit_test_runtime "${current_suite_name}::${current_test_name}" | sed "s/^/    /g"
+        $unit_test_runtime "${unit_test_resources_path}" "${current_suite_name}::${current_test_name}" | sed "s/^/    /g"
         return_value=${PIPESTATUS[0]}
 
         # Check return value
