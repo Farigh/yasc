@@ -34,6 +34,7 @@
 #  pragma GCC diagnostic pop
 # endif
 
+# include <memory>
 # include <string>
 
 namespace yasc {
@@ -46,13 +47,13 @@ class YascTestRunner : public CppUnit::TestRunner
 public:
     YascTestRunner();
 
-    ~YascTestRunner();
+    ~YascTestRunner() = default;
 
     bool runTests();
 
 private:
     CppUnit::TestResult _eventManager;
-    CppUnit::TestResultCollector* _resultCollector;
+    std::unique_ptr<CppUnit::TestResultCollector> _resultCollector;
 };
 
 } // namespace cppunit

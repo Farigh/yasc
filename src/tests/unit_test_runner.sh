@@ -49,13 +49,18 @@ while read -r test_line; do
         if [ "${test_line}" != "Test suite end" ]; then
             echo "**** Begin of suite ${PURPLE}${current_suite_name}${RESET_COLOR}"
         fi
+    # New test
     elif [[ "${test_line}" == "Test:"* ]]; then
         current_test_name=$(echo ${test_line} | sed "s/^Test: ${current_suite_name}:://")
         echo "** Running test ${CYAN}${current_test_name}${RESET_COLOR}"
-        $unit_test_runtime "${current_suite_name}::${current_test_name}"
+
+        # Actually run the test (add left-padding on the output)
+        $unit_test_runtime "${current_suite_name}::${current_test_name}" | sed "s/^/    /g"
+        return_value=${PIPESTATUS[0]}
+
         # Check return value
         result_str="${LIGHT_GREEN}PASS${RESET_COLOR}"
-        if [ $? -ne 0 ]; then
+        if [ $return_value -ne 0 ]; then
             result_str="${LIGHT_RED}FAIL${RESET_COLOR}"
             ((total_test_failed++))
             ((current_suite_test_failed++))

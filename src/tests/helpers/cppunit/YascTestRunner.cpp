@@ -17,6 +17,22 @@
  */
 #include "YascTestRunner.h"
 
+# ifdef __GNUC__
+// Disable CppUnit warnings (third-party)
+#  pragma GCC diagnostic push
+#  pragma GCC diagnostic ignored "-Wsuggest-override"
+# endif
+
+#include <cppunit/Exception.h>
+#include <cppunit/TestFailure.h>
+
+# ifdef __GNUC__
+// Restore warnings
+#  pragma GCC diagnostic pop
+# endif
+
+#include <iostream>
+
 namespace yasc {
 namespace tests {
 namespace helpers {
@@ -25,13 +41,7 @@ namespace cppunit {
 YascTestRunner::YascTestRunner()
     : _resultCollector(new CppUnit::TestResultCollector())
 {
-    _eventManager.addListener(_resultCollector);
-}
-
-YascTestRunner::~YascTestRunner()
-{
-    // Cleanup memory
-    delete _resultCollector;
+    _eventManager.addListener(_resultCollector.get());
 }
 
 /**
@@ -41,6 +51,27 @@ YascTestRunner::~YascTestRunner()
 bool YascTestRunner::runTests()
 {
     run(_eventManager, "");
+
+    // Print failures
+    for (const CppUnit::TestFailure *failure : _resultCollector->failures())
+    {
+        // Print error location
+        const CppUnit::SourceLine locationObject = failure->sourceLine();
+        std::string location = "at unknown location";
+        if (locationObject.isValid())
+        {
+            location = "in file " + locationObject.fileName() + " at line " + std::to_string(locationObject.lineNumber());
+        }
+
+        std::cout << "Failure occured " << location << std::endl;
+
+        // Print error content
+        CppUnit::Exception* error = failure->thrownException();
+
+        std::cout << error->message().shortDescription() << std::endl;
+        std::cout << error->message().details();
+    }
+
     return _resultCollector->wasSuccessful();
 }
 
