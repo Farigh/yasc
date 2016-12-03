@@ -60,7 +60,7 @@ void DictionaryTest::AddInvalidEntityTest()
     CPPUNIT_ASSERT_EQUAL(expectedOutput.str(), dict.toString());
 }
 
-void DictionaryTest::AddEntityComplexTest()
+void DictionaryTest::AddEntityComplexTest(const Steps step)
 {
     // Create dictionary with 3 letters alphabet
     const std::set<char> alphabet = { 'a', 'b', 'c' };
@@ -76,15 +76,30 @@ void DictionaryTest::AddEntityComplexTest()
                    << " -> a -> b -> b -> a -> a -> []" << std::endl;
     CPPUNIT_ASSERT_EQUAL(expectedOutput.str(), dict.toString());
 
+    if (step == Steps::AddValidEntry)
+    {
+        return;
+    }
+
     // === Adding a valid entry twice should return true and the dictionary should remain the same
     CPPUNIT_ASSERT(dict.addEntry("abbaa"));
     CPPUNIT_ASSERT_EQUAL(expectedOutput.str(), dict.toString());
+
+    if (step == Steps::AddValidEntryTwice)
+    {
+        return;
+    }
 
     // === Adding an invalid entry (contains z, which is not in the distionary) should return false
     CPPUNIT_ASSERT(!dict.safeAddEntry("abbza"));
 
     // Check tree consistency (should not have changed since we use safeAddEntry)
     CPPUNIT_ASSERT_EQUAL(expectedOutput.str(), dict.toString());
+
+    if (step == Steps::AddInvalidEntry)
+    {
+        return;
+    }
 
     // === Adding an entry with no common prefix
     CPPUNIT_ASSERT(dict.addEntry("bacbac"));
@@ -96,6 +111,11 @@ void DictionaryTest::AddEntityComplexTest()
                     << " -> b -> a -> c -> b -> a -> c -> []" << std::endl;
     CPPUNIT_ASSERT_EQUAL(expectedOutput2.str(), dict.toString());
 
+    if (step == Steps::AddEntryWithNoCommonPrefix)
+    {
+        return;
+    }
+
     // === Adding a longer entry with common prefix
     CPPUNIT_ASSERT(dict.addEntry("abbaacc"));
 
@@ -106,6 +126,11 @@ void DictionaryTest::AddEntityComplexTest()
                     << "                          -> c -> c -> []" << std::endl
                     << " -> b -> a -> c -> b -> a -> c -> []" << std::endl;
     CPPUNIT_ASSERT_EQUAL(expectedOutput3.str(), dict.toString());
+
+    if (step == Steps::AddLongEntryWithCommonPrefix)
+    {
+        return;
+    }
 
     // === Adding a shorter entry which is already a prefix
     CPPUNIT_ASSERT(dict.addEntry("abb"));

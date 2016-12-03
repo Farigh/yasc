@@ -24,17 +24,33 @@ namespace yasc {
 
 class DictionaryTest : public CppUnit::TestFixture
 {
+private:
+    enum class Steps : std::uint8_t
+    {
+        AddValidEntry = 0,
+        AddValidEntryTwice,
+        AddInvalidEntry,
+        AddEntryWithNoCommonPrefix,
+        AddLongEntryWithCommonPrefix,
+        AddEntryWhichIsAPrefix
+    };
+
     CPPUNIT_TEST_SUITE(DictionaryTest);
         CPPUNIT_TEST(AddValidEntityTest);
         CPPUNIT_TEST(AddInvalidEntityTest);
-        CPPUNIT_TEST(AddEntityComplexTest);
+        YACS_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddValidEntry);
+        YACS_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddValidEntryTwice);
+        YACS_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddInvalidEntry);
+        YACS_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddEntryWithNoCommonPrefix);
+        YACS_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddLongEntryWithCommonPrefix);
+        YACS_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddEntryWhichIsAPrefix);
         CPPUNIT_TEST(CheckEntityExistenceTest);
     CPPUNIT_TEST_SUITE_END();
 
 public:
     void AddValidEntityTest();
     void AddInvalidEntityTest();
-    void AddEntityComplexTest();
+    void AddEntityComplexTest(const Steps step);
     void CheckEntityExistenceTest();
 };
 

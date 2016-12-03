@@ -27,6 +27,27 @@
 
 # include <cppunit/extensions/HelperMacros.h>
 
+/*************************\
+|***   Custom macros   ***|
+\*************************/
+
+# include "YascTestCaller.h"
+
+/**
+ * @brief Add a parameterized method to the suite.
+ * @param testMethod Name of the method of the test case to add to the
+ *                   suite. The signature of the method must be of
+ *                   type: void testMethod();
+ * @param args The list of arguments to passe to the method
+ */
+#define YACS_CPPUNIT_PARAMETERIZED_TEST(testMethod, args...)                  \
+    CPPUNIT_TEST_SUITE_ADD_TEST(                                              \
+        new ::yasc::tests::helpers::cppunit::YascTestCaller<TestFixtureType>( \
+            context.getTestNameFor(#testMethod "(" #args ")"),                \
+            context.makeFixture(),                                            \
+            &TestFixtureType::testMethod,                                     \
+            ##args))
+
 # ifdef __GNUC__
 // Restore warnings
 #  pragma GCC diagnostic pop
