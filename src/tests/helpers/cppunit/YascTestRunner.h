@@ -39,6 +39,7 @@
 namespace yasc {
 namespace tests {
 namespace helpers {
+namespace cppunit {
 
 class YascTestRunner : public CppUnit::TestRunner
 {
@@ -54,6 +55,7 @@ private:
     CppUnit::TestResultCollector* _resultCollector;
 };
 
+} // namespace cppunit
 } // namespace helpers
 } // namespace tests
 } // namespace yasc

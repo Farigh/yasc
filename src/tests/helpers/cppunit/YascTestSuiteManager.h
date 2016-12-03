@@ -25,6 +25,7 @@
 namespace yasc {
 namespace tests {
 namespace helpers {
+namespace cppunit {
 
 class YascTestSuiteManager
 {
@@ -39,6 +40,7 @@ private:
     CppUnit::Test* _allTests;
 };
 
+} // namespace cppunit
 } // namespace helpers
 } // namespace tests
 } // namespace yasc

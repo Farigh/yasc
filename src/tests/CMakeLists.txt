@@ -16,8 +16,10 @@ add_executable(
     ${TEST_NAME}
     EXCLUDE_FROM_ALL
     main.cpp
-    helpers/YascTestSuiteManager.cpp
-    helpers/YascTestRunner.cpp
+    # Helpers
+    helpers/cppunit/YascTestSuiteManager.cpp
+    helpers/cppunit/YascTestRunner.cpp
+    # Tests
     tests/utils/DictionaryTest.cpp
 )
 

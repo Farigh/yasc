@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <helpers/YascTestSuiteManager.h>
+#include <helpers/cppunit/YascTestSuiteManager.h>
 
 #include <cstdint>
 #include <iostream>
@@ -23,7 +23,7 @@
 int main (int argc, char* argv[])
 {
     bool returnValue = 1;
-    ::yasc::tests::helpers::YascTestSuiteManager unitTestRunner;
+    ::yasc::tests::helpers::cppunit::YascTestSuiteManager unitTestRunner;
     if (argc > 2)
     {
         std::cerr << "Error: too many aruments" << std::endl;

@@ -20,6 +20,7 @@
 namespace yasc {
 namespace tests {
 namespace helpers {
+namespace cppunit {
 
 YascTestRunner::YascTestRunner()
     : _resultCollector(new CppUnit::TestResultCollector())
@@ -43,6 +44,7 @@ bool YascTestRunner::runTests()
     return _resultCollector->wasSuccessful();
 }
 
+} // namespace cppunit
 } // namespace helpers
 } // namespace tests
 } // namespace yasc

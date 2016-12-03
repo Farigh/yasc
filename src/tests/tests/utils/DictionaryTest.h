@@ -18,7 +18,7 @@
 #ifndef _DICTIONARY_TEST_H_
 # define _DICTIONARY_TEST_H_
 
-# include <helpers/CppUnitHelperMacrosWrapper.h>
+# include <helpers/cppunit/CppUnitHelperMacrosWrapper.h>
 
 namespace yasc {
 
