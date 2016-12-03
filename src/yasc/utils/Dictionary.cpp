@@ -128,6 +128,7 @@ bool Dictionary::isExistingEntry(const std::string& entry)
             entryExists = false;
             break;
         }
+        currentNode = tmpNode;
     }
 
     // Entry exists if it can go through it's entire transitions and ends with an output node
