@@ -23,6 +23,7 @@
 # include "ADictionaryTest.h"
 
 namespace yasc {
+namespace tests {
 
 class DynamicDictionaryTest : public CppUnit::TestFixture, protected ADictionaryTest
 {
@@ -45,6 +46,7 @@ public:
     void CheckEntityExistenceTest();
 };
 
+} // namespace tests
 } // namespace yasc
 
 #endif /* !_DYNAMIC_DICTIONARY_TEST_H_ */

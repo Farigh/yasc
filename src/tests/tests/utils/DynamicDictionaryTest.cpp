@@ -23,6 +23,7 @@
 #include <sstream>
 
 namespace yasc {
+namespace tests {
 
 // Register test suite
 CPPUNIT_TEST_SUITE_REGISTRATION(DynamicDictionaryTest);
@@ -48,4 +49,5 @@ void DynamicDictionaryTest::CheckEntityExistenceTest()
     CheckEntityExistence(dict);
 }
 
+} // namespace tests
 } // namespace yasc

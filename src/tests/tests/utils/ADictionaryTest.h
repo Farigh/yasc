@@ -23,6 +23,7 @@
 # include <list>
 
 namespace yasc {
+namespace tests {
 
 class ADictionaryTest
 {
@@ -168,6 +169,7 @@ protected:
     }
 };
 
+} // namespace tests
 } // namespace yasc
 
 #endif /* !_A_DICTIONARY_TEST_H_ */
