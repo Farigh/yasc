@@ -20,20 +20,14 @@
 
 # include <helpers/cppunit/CppUnitHelperMacrosWrapper.h>
 
+# include "ADictionaryTest.h"
+
 namespace yasc {
 
-class DictionaryTest : public CppUnit::TestFixture
+class DictionaryTest : public CppUnit::TestFixture, protected ADictionaryTest
 {
 private:
-    enum class Steps : std::uint8_t
-    {
-        AddValidEntry = 0,
-        AddValidEntryTwice,
-        AddInvalidEntry,
-        AddEntryWithNoCommonPrefix,
-        AddLongEntryWithCommonPrefix,
-        AddEntryWhichIsAPrefix
-    };
+    using Steps = ADictionaryTest::Steps;
 
     CPPUNIT_TEST_SUITE(DictionaryTest);
         CPPUNIT_TEST(AddValidEntityTest);

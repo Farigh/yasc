@@ -19,7 +19,6 @@
 
 #include <utils/Dictionary.h>
 
-#include <list>
 #include <sstream>
 
 namespace yasc {
@@ -34,14 +33,7 @@ void DictionaryTest::AddValidEntityTest()
 
     ::yasc::utils::Dictionary dict(alphabet);
 
-    // Adding a valid entry should return true
-    CPPUNIT_ASSERT(dict.addEntry("abbaa"));
-
-    // Check tree consistency
-    std::ostringstream expectedOutput;
-    expectedOutput << " -> []" << std::endl
-                   << " -> a -> b -> b -> a -> a -> []" << std::endl;
-    CPPUNIT_ASSERT_EQUAL(expectedOutput.str(), dict.toString());
+    CheckAddEntity(dict);
 }
 
 void DictionaryTest::AddInvalidEntityTest()
@@ -67,25 +59,9 @@ void DictionaryTest::AddEntityComplexTest(const Steps step)
 
     ::yasc::utils::Dictionary dict(alphabet);
 
-    // === Adding a valid entry should return true
-    CPPUNIT_ASSERT(dict.addEntry("abbaa"));
+    const std::ostringstream expectedOutput = CheckAddEntityComplex(dict, step);
 
-    // Check tree consistency
-    std::ostringstream expectedOutput;
-    expectedOutput << " -> []" << std::endl
-                   << " -> a -> b -> b -> a -> a -> []" << std::endl;
-    CPPUNIT_ASSERT_EQUAL(expectedOutput.str(), dict.toString());
-
-    if (step == Steps::AddValidEntry)
-    {
-        return;
-    }
-
-    // === Adding a valid entry twice should return true and the dictionary should remain the same
-    CPPUNIT_ASSERT(dict.addEntry("abbaa"));
-    CPPUNIT_ASSERT_EQUAL(expectedOutput.str(), dict.toString());
-
-    if (step == Steps::AddValidEntryTwice)
+    if (step != Steps::AddInvalidEntry)
     {
         return;
     }
@@ -95,54 +71,6 @@ void DictionaryTest::AddEntityComplexTest(const Steps step)
 
     // Check tree consistency (should not have changed since we use safeAddEntry)
     CPPUNIT_ASSERT_EQUAL(expectedOutput.str(), dict.toString());
-
-    if (step == Steps::AddInvalidEntry)
-    {
-        return;
-    }
-
-    // === Adding an entry with no common prefix
-    CPPUNIT_ASSERT(dict.addEntry("bacbac"));
-
-    // Check tree consistency
-    std::ostringstream expectedOutput2;
-    expectedOutput2 << " -> []" << std::endl
-                    << " -> a -> b -> b -> a -> a -> []" << std::endl
-                    << " -> b -> a -> c -> b -> a -> c -> []" << std::endl;
-    CPPUNIT_ASSERT_EQUAL(expectedOutput2.str(), dict.toString());
-
-    if (step == Steps::AddEntryWithNoCommonPrefix)
-    {
-        return;
-    }
-
-    // === Adding a longer entry with common prefix
-    CPPUNIT_ASSERT(dict.addEntry("abbaacc"));
-
-    // Check tree consistency
-    std::ostringstream expectedOutput3;
-    expectedOutput3 << " -> []" << std::endl
-                    << " -> a -> b -> b -> a -> a -> []" << std::endl
-                    << "                          -> c -> c -> []" << std::endl
-                    << " -> b -> a -> c -> b -> a -> c -> []" << std::endl;
-    CPPUNIT_ASSERT_EQUAL(expectedOutput3.str(), dict.toString());
-
-    if (step == Steps::AddLongEntryWithCommonPrefix)
-    {
-        return;
-    }
-
-    // === Adding a shorter entry which is already a prefix
-    CPPUNIT_ASSERT(dict.addEntry("abb"));
-
-    // Check tree consistency
-    std::ostringstream expectedOutput4;
-    expectedOutput4 << " -> []" << std::endl
-                    << " -> a -> b -> b -> []" << std::endl
-                    << "                -> a -> a -> []" << std::endl
-                    << "                          -> c -> c -> []" << std::endl
-                    << " -> b -> a -> c -> b -> a -> c -> []" << std::endl;
-    CPPUNIT_ASSERT_EQUAL(expectedOutput4.str(), dict.toString());
 }
 
 void DictionaryTest::CheckEntityExistenceTest()
@@ -152,39 +80,7 @@ void DictionaryTest::CheckEntityExistenceTest()
 
     ::yasc::utils::Dictionary dict(alphabet);
 
-    // === Add some entries to the dictionary
-    const std::list<std::string> entries = { "abbaa", "abcba", "acbaabba" };
-    for (const std::string& entry : entries)
-    {
-        dict.addEntry(entry);
-    }
-
-    // === Check for existing values
-    for (const std::string& entry : entries)
-    {
-        CPPUNIT_ASSERT(dict.isExistingEntry(entry));
-    }
-
-    // Empty string is a valid one
-    CPPUNIT_ASSERT(dict.isExistingEntry(""));
-
-    // === Check for unknown entries
-    CPPUNIT_ASSERT(!dict.isExistingEntry("aaabccb"));
-
-    // Check with unknown char
-    CPPUNIT_ASSERT(!dict.isExistingEntry("jdi"));
-
-    // Check with existing prefix
-    for (const std::string& entry : entries)
-    {
-        CPPUNIT_ASSERT(!dict.isExistingEntry(entry + "cca"));
-    }
-
-    // Check with partial match
-    for (const std::string& entry : entries)
-    {
-        CPPUNIT_ASSERT(!dict.isExistingEntry(entry.substr(0, 3)));
-    }
+    CheckEntityExistence(dict);
 }
 
 } // namespace yasc
