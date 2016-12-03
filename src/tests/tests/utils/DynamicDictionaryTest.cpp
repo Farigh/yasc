@@ -15,41 +15,37 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _DICTIONARY_H_
-# define _DICTIONARY_H_
+#include "DynamicDictionaryTest.h"
 
-# include "GraphNode.h"
+#include <utils/DynamicDictionary.h>
 
-# include <set>
+#include <list>
+#include <sstream>
 
 namespace yasc {
-namespace utils {
 
-class Dictionary
+// Register test suite
+CPPUNIT_TEST_SUITE_REGISTRATION(DynamicDictionaryTest);
+
+void DynamicDictionaryTest::AddEntityTest()
 {
-public:
-    using Ptr = std::shared_ptr<Dictionary>;
-    using NodeType = GraphNode<char>::Ptr;
+    ::yasc::utils::DynamicDictionary dict;
 
-    // Keep the compiler from generating default ctor
-    Dictionary() = delete;
-    Dictionary(const std::set<char>& alphabet);
-    virtual ~Dictionary() = default;
+    CheckAddEntity(dict);
+}
 
-    virtual bool addEntry(const std::string& entry);
-    virtual bool safeAddEntry(const std::string& entry);
-    bool isExistingEntry(const std::string& entry);
+void DynamicDictionaryTest::AddEntityComplexTest(const Steps step)
+{
+    ::yasc::utils::DynamicDictionary dict;
 
-    std::string toString() const;
+    CheckAddEntityComplex(dict, step);
+}
 
-protected:
-    NodeType _head;
+void DynamicDictionaryTest::CheckEntityExistenceTest()
+{
+    ::yasc::utils::DynamicDictionary dict;
 
-private:
-    const std::set<char>& _alphabet;
-};
+    CheckEntityExistence(dict);
+}
 
-} // namespace utils
 } // namespace yasc
-
-#endif /* !_DICTIONARY_H_ */

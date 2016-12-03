@@ -25,5 +25,6 @@ add_library(
     ${LIBRARY_NAME}
     SHARED
     utils/Dictionary.cpp
+    utils/DynamicDictionary.cpp
 )
 

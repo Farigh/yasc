@@ -39,7 +39,7 @@ while read -r test_line; do
 
             echo "** Suite failure count: ${failure_color}${current_suite_test_failed}${RESET_COLOR}"
             echo "****"
-            echo "******** End of suite > ${current_suite_name}"
+            echo -e "******** End of suite > ${current_suite_name}\n"
         fi
 
         current_suite_test_failed=0
@@ -74,7 +74,6 @@ if [ $(($total_test_failed + $total_test_succeeded)) -ne 0 ]; then
     if [ $total_test_failed -ne 0 ]; then
         final_result_str="${LIGHT_RED}FAIL${RESET_COLOR}"
     fi
-    echo ""
     echo ""
     echo "**** Summary [${final_result_str}]"
     echo "**    Total test count: $(($total_test_failed + $total_test_succeeded))"

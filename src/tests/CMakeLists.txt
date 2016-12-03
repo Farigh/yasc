@@ -21,6 +21,7 @@ add_executable(
     helpers/cppunit/YascTestRunner.cpp
     # Tests
     tests/utils/DictionaryTest.cpp
+    tests/utils/DynamicDictionaryTest.cpp
 )
 
 # Add needed libs

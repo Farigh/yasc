@@ -15,41 +15,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _DICTIONARY_H_
-# define _DICTIONARY_H_
+#ifndef _DYNAMIC_DICTIONARY_H_
+# define _DYNAMIC_DICTIONARY_H_
 
-# include "GraphNode.h"
-
-# include <set>
+# include "Dictionary.h"
 
 namespace yasc {
 namespace utils {
 
-class Dictionary
+class DynamicDictionary : public Dictionary
 {
 public:
-    using Ptr = std::shared_ptr<Dictionary>;
-    using NodeType = GraphNode<char>::Ptr;
+    DynamicDictionary();
 
-    // Keep the compiler from generating default ctor
-    Dictionary() = delete;
-    Dictionary(const std::set<char>& alphabet);
-    virtual ~Dictionary() = default;
+    ~DynamicDictionary() = default;
 
-    virtual bool addEntry(const std::string& entry);
-    virtual bool safeAddEntry(const std::string& entry);
-    bool isExistingEntry(const std::string& entry);
-
-    std::string toString() const;
-
-protected:
-    NodeType _head;
-
-private:
-    const std::set<char>& _alphabet;
+    bool addEntry(const std::string& entry) override;
+    bool safeAddEntry(const std::string& entry) override;
 };
 
 } // namespace utils
 } // namespace yasc
 
-#endif /* !_DICTIONARY_H_ */
+#endif /* !_DYNAMIC_DICTIONARY_H_ */

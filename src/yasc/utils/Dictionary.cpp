@@ -38,6 +38,7 @@ Dictionary::Dictionary(const std::set<char>& alphabet)
  * @brief This function adds an entry to the dictionary
  * It will not check for it's validity before adding new nodes, if the entry was not valid
  * the dictionnary might get corrupted.
+ * @param entry the entry to add
  * @return returns true if the entry is valid (according to the alphabet), false otherwhise
  */
 bool Dictionary::addEntry(const std::string& entry)
@@ -77,6 +78,7 @@ bool Dictionary::addEntry(const std::string& entry)
 
 /**
  * @brief This function adds an entry to the dictionary only if it's a valid one
+ * @param entry the entry to add
  * @return returns true if the entry is valid (according to the alphabet), false otherwhise
  */
 bool Dictionary::safeAddEntry(const std::string& entry)
@@ -107,6 +109,7 @@ bool Dictionary::safeAddEntry(const std::string& entry)
 
 /**
  * @brief This function checks if the given @p entry is part of the dictionary
+ * @param entry the entry to check
  * @return returns true if the entry exists, false otherwhise
  */
 bool Dictionary::isExistingEntry(const std::string& entry)
