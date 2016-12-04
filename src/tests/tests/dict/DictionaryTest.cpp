@@ -17,7 +17,7 @@
  */
 #include "DictionaryTest.h"
 
-#include <utils/Dictionary.h>
+#include <yasc/dict/Dictionary.h>
 
 #include <sstream>
 
@@ -32,7 +32,7 @@ void DictionaryTest::AddValidEntityTest()
     // Create dictionary with 3 letters alphabet
     const std::set<char> alphabet = { 'a', 'b', 'c' };
 
-    ::yasc::utils::Dictionary dict(alphabet);
+    ::yasc::dict::Dictionary dict(alphabet);
 
     CheckAddEntity(dict);
 }
@@ -42,7 +42,7 @@ void DictionaryTest::AddInvalidEntityTest()
     // Create dictionary with 3 letters alphabet
     const std::set<char> alphabet = { 'a', 'b', 'c' };
 
-    ::yasc::utils::Dictionary dict(alphabet);
+    ::yasc::dict::Dictionary dict(alphabet);
 
     // Adding an invalid entry (contains z, which is not in the distionary) should return false
     CPPUNIT_ASSERT(!dict.safeAddEntry("abbza"));
@@ -58,7 +58,7 @@ void DictionaryTest::AddEntityComplexTest(const Steps step)
     // Create dictionary with 3 letters alphabet
     const std::set<char> alphabet = { 'a', 'b', 'c' };
 
-    ::yasc::utils::Dictionary dict(alphabet);
+    ::yasc::dict::Dictionary dict(alphabet);
 
     const std::ostringstream expectedOutput = CheckAddEntityComplex(dict, step);
 
@@ -79,7 +79,7 @@ void DictionaryTest::CheckEntityExistenceTest()
     // Create dictionary with 3 letters alphabet
     const std::set<char> alphabet = { 'a', 'b', 'c' };
 
-    ::yasc::utils::Dictionary dict(alphabet);
+    ::yasc::dict::Dictionary dict(alphabet);
 
     CheckEntityExistence(dict);
 }

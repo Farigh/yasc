@@ -15,39 +15,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "DynamicDictionaryTest.h"
+#ifndef _DICTIONARY_FACTORY_H_
+# define _DICTIONARY_FACTORY_H_
 
-#include <utils/DynamicDictionary.h>
-
-#include <list>
-#include <sstream>
+# include "Dictionary.h"
 
 namespace yasc {
-namespace tests {
+namespace dict {
 
-// Register test suite
-CPPUNIT_TEST_SUITE_REGISTRATION(DynamicDictionaryTest);
-
-void DynamicDictionaryTest::AddEntityTest()
+class DictionaryFactory
 {
-    ::yasc::utils::DynamicDictionary dict;
+public:
+    using Ptr = std::shared_ptr<DictionaryFactory>;
 
-    CheckAddEntity(dict);
-}
+    // The factory is not supposed to be instanciated
+    DictionaryFactory() = delete;
 
-void DynamicDictionaryTest::AddEntityComplexTest(const Steps step)
-{
-    ::yasc::utils::DynamicDictionary dict;
+    static Dictionary::Ptr CreateFromFile(const std::string& filePath);
+};
 
-    CheckAddEntityComplex(dict, step);
-}
-
-void DynamicDictionaryTest::CheckEntityExistenceTest()
-{
-    ::yasc::utils::DynamicDictionary dict;
-
-    CheckEntityExistence(dict);
-}
-
-} // namespace tests
+} // namespace dict
 } // namespace yasc
+
+#endif /* !_DICTIONARY_FACTORY_H_ */

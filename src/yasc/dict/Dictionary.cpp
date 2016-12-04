@@ -20,7 +20,7 @@
 #include <locale>
 
 namespace yasc {
-namespace utils {
+namespace dict {
 
 /**
  * @brief This is the @c Dictionary constructor
@@ -144,5 +144,5 @@ std::string Dictionary::toString() const
     return _head->toString();
 }
 
-} // namespace utils
+} // namespace dict
 } // namespace yasc

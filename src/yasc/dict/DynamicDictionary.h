@@ -21,7 +21,7 @@
 # include "Dictionary.h"
 
 namespace yasc {
-namespace utils {
+namespace dict {
 
 class DynamicDictionary : public Dictionary
 {
@@ -34,7 +34,7 @@ public:
     bool safeAddEntry(const std::string& entry) override;
 };
 
-} // namespace utils
+} // namespace dict
 } // namespace yasc
 
 #endif /* !_DYNAMIC_DICTIONARY_H_ */

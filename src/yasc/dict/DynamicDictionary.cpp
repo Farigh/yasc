@@ -20,7 +20,7 @@
 #include <locale>
 
 namespace yasc {
-namespace utils {
+namespace dict {
 
 /**
  * @brief This is the @c DynamicDictionary constructor
@@ -73,5 +73,5 @@ bool DynamicDictionary::safeAddEntry(const std::string& entry)
     return addEntry(entry);
 }
 
-} // namespace utils
+} // namespace dict
 } // namespace yasc

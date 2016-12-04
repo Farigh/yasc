@@ -24,7 +24,7 @@
 # include <unordered_map>
 
 namespace yasc {
-namespace utils {
+namespace dict {
 
 template <typename KeyType>
 class GraphNode
@@ -128,7 +128,7 @@ private:
     TransitionsType _transitions;
 };
 
-} // namespace utils
+} // namespace dict
 } // namespace yasc
 
 #endif /* !_GRAPH_NODE_H_ */

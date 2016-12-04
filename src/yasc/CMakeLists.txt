@@ -2,8 +2,8 @@
 set(BINARY_NAME ${PROJECT_NAME})
 set(LIBRARY_NAME ${PROJECT_NAME}l)
 
-# Add current directory to include path
-include_directories(.)
+# Project root include dir
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 # Current project lib dir
 link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
@@ -24,8 +24,8 @@ target_link_libraries(
 add_library(
     ${LIBRARY_NAME}
     SHARED
-    utils/Dictionary.cpp
-    utils/DictionaryFactory.cpp
-    utils/DynamicDictionary.cpp
+    dict/Dictionary.cpp
+    dict/DictionaryFactory.cpp
+    dict/DynamicDictionary.cpp
 )
 

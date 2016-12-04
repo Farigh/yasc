@@ -22,7 +22,7 @@
 #include <fstream>
 
 namespace yasc {
-namespace utils {
+namespace dict {
 
 /**
  * @brief Creates a dictionnary and populate it from a given file (@p filePath)
@@ -44,5 +44,5 @@ Dictionary::Ptr DictionaryFactory::CreateFromFile(const std::string& filePath)
 }
 
 
-} // namespace utils
+} // namespace dict
 } // namespace yasc

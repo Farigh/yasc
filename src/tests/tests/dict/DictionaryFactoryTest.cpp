@@ -18,7 +18,7 @@
 #include "DictionaryFactoryTest.h"
 
 #include <tests/DataManager.h>
-#include <utils/DictionaryFactory.h>
+#include <yasc/dict/DictionaryFactory.h>
 
 namespace yasc {
 namespace tests {
@@ -32,7 +32,7 @@ void DictionaryFactoryTest::CreateFromFileTest()
     const std::string resourceFile = resourcePath + "/dictionary_factory/create_from_file_test.txt";
 
     // Load dictionary from file
-    ::yasc::utils::Dictionary::Ptr dict = ::yasc::utils::DictionaryFactory::CreateFromFile(resourceFile);
+    ::yasc::dict::Dictionary::Ptr dict = ::yasc::dict::DictionaryFactory::CreateFromFile(resourceFile);
 
     std::ostringstream expectedOutput;
     expectedOutput << " -> []" << std::endl

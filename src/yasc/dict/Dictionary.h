@@ -15,26 +15,41 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _DICTIONARY_FACTORY_H_
-# define _DICTIONARY_FACTORY_H_
+#ifndef _DICTIONARY_H_
+# define _DICTIONARY_H_
 
-# include "Dictionary.h"
+# include "GraphNode.h"
+
+# include <set>
 
 namespace yasc {
-namespace utils {
+namespace dict {
 
-class DictionaryFactory
+class Dictionary
 {
 public:
-    using Ptr = std::shared_ptr<DictionaryFactory>;
+    using Ptr = std::shared_ptr<Dictionary>;
+    using NodeType = GraphNode<char>::Ptr;
 
-    // The factory is not supposed to be instanciated
-    DictionaryFactory() = delete;
+    // Keep the compiler from generating default ctor
+    Dictionary() = delete;
+    Dictionary(const std::set<char>& alphabet);
+    virtual ~Dictionary() = default;
 
-    static Dictionary::Ptr CreateFromFile(const std::string& filePath);
+    virtual bool addEntry(const std::string& entry);
+    virtual bool safeAddEntry(const std::string& entry);
+    bool isExistingEntry(const std::string& entry);
+
+    std::string toString() const;
+
+protected:
+    NodeType _head;
+
+private:
+    const std::set<char>& _alphabet;
 };
 
-} // namespace utils
+} // namespace dict
 } // namespace yasc
 
-#endif /* !_DICTIONARY_FACTORY_H_ */
+#endif /* !_DICTIONARY_H_ */

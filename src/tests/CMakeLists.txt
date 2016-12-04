@@ -3,8 +3,8 @@ set (TEST_NAME YascUnitTestRunner)
 # Add current directory to include path
 include_directories(.)
 
-# Project sources include dir
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../yasc)
+# Project root include dir
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 # Third-parties include dir
 include_directories(${CMAKE_OUTPUT_DIRECTORY}/include)
@@ -24,9 +24,9 @@ add_executable(
     helpers/cppunit/YascTestRunner.cpp
 
     # Tests
-    tests/utils/DictionaryFactoryTest.cpp
-    tests/utils/DictionaryTest.cpp
-    tests/utils/DynamicDictionaryTest.cpp
+    tests/dict/DictionaryFactoryTest.cpp
+    tests/dict/DictionaryTest.cpp
+    tests/dict/DynamicDictionaryTest.cpp
 )
 
 # Add needed libs
