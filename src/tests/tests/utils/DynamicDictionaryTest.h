@@ -32,11 +32,11 @@ private:
 
     CPPUNIT_TEST_SUITE(DynamicDictionaryTest);
         CPPUNIT_TEST(AddEntityTest);
-        YACS_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddValidEntry);
-        YACS_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddValidEntryTwice);
-        YACS_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddEntryWithNoCommonPrefix);
-        YACS_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddLongEntryWithCommonPrefix);
-        YACS_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddEntryWhichIsAPrefix);
+        YASC_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddValidEntry);
+        YASC_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddValidEntryTwice);
+        YASC_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddEntryWithNoCommonPrefix);
+        YASC_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddLongEntryWithCommonPrefix);
+        YASC_CPPUNIT_PARAMETERIZED_TEST(AddEntityComplexTest, Steps::AddEntryWhichIsAPrefix);
         CPPUNIT_TEST(CheckEntityExistenceTest);
     CPPUNIT_TEST_SUITE_END();
 

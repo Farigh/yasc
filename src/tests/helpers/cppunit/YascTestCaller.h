@@ -40,8 +40,6 @@ template <class Fixture>
 class YascTestCaller : public CppUnit::TestCase
 {
 public:
-    using TestMethod = void (Fixture::*)();
-
     /*!
     * Constructor for YascTestCaller.
     * This constructor does not create a new Fixture instance but accepts
