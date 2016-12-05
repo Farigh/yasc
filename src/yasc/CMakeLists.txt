@@ -24,8 +24,14 @@ target_link_libraries(
 add_library(
     ${LIBRARY_NAME}
     SHARED
+
+    # dict
     dict/Dictionary.cpp
     dict/DictionaryFactory.cpp
     dict/DynamicDictionary.cpp
+
+    # utils
+    utils/YascOption.cpp
+    utils/YascGetopts.cpp
 )
 
