@@ -18,51 +18,74 @@
 #include <helpers/cppunit/YascTestSuiteManager.h>
 #include <tests/DataManager.h>
 
+#include <yasc/utils/YascGetopts.h>
+
 #include <cstdint>
 #include <iostream>
-
-static void printUsage(const char* binName)
-{
-    std::cout << "Usage: " << binName << "<resource_path> [test_name]" << std::endl;
-}
+#include <sstream>
 
 int main (int argc, char* argv[])
 {
-    bool returnValue = 1;
+    std::int32_t returnValue = 0;
+    bool runTestOptionFound = false;
+    std::string runTestOptionArg;
     ::yasc::tests::helpers::cppunit::YascTestSuiteManager unitTestRunner;
-    if (argc > 3)
+
+    ::yasc::utils::YascGetopts getOpts;
+
+    // Register all options
+    getOpts.registerHelpOption();
+
+    getOpts.registerOption('l',
+                           "list-tests",
+                           [&]()
+                           {
+                               std::cout << unitTestRunner.listAllTests() << std::endl;
+                               std::exit(0);
+                           },
+                           "List all available test-suites and there tests");
+
+    getOpts.registerArgBasedOption('t',
+                                   "run-test",
+                                   [&](const std::string& testName)
+                                   {
+                                       runTestOptionFound = true;
+                                       runTestOptionArg = testName;
+                                   },
+                                   "Run the selected test by it's name",
+                                   "test_name");
+
+    getOpts.registerArgBasedOption('r',
+                                   "resource-path",
+                                   [&](const std::string& resourcePath)
+                                   {
+                                       ::yasc::tests::DataManager::setResourcePath(resourcePath);
+                                   },
+                                   "Set the resource path",
+                                   "resource_path",
+                                   true);
+
+    // Process options
+    const std::list<std::string> remainingArgs = getOpts.parseArgs(argc, argv);
+    if (!remainingArgs.empty())
     {
-        std::cerr << "Error: too many aruments" << std::endl;
-        printUsage(argv[0]);
+        std::ostringstream errorMsgFormater;
+        errorMsgFormater << "Error: unknown arguments:" << std::endl;
+        for (const std::string& arg : remainingArgs)
+        {
+            errorMsgFormater << "'" << arg << "' ";
+        }
+        getOpts.PrintErrorMessage(errorMsgFormater.str());
+
+        returnValue = 1;
     }
-    // Print tests
-    else if ((argc == 2) && (std::string(argv[1]) == "-l"))
+    else if (runTestOptionFound)
     {
-        std::cout << unitTestRunner.listAllTests() << std::endl;
+        returnValue = unitTestRunner.runTestByName(runTestOptionArg);
     }
-    // Run tests
     else
     {
-        // TODO: use getopts
-        if (argc < 2)
-        {
-            std::cerr << "Error: missing resource path" << std::endl;
-            printUsage(argv[0]);
-        }
-        else
-        {
-            ::yasc::tests::DataManager::setResourcePath(std::string(argv[1]));
-
-            // Select specific test if asked for
-            if (argc == 3)
-            {
-                returnValue = unitTestRunner.runTestByName(argv[2]);
-            }
-            else
-            {
-                returnValue = unitTestRunner.runAllTests();
-            }
-        }
+        returnValue = unitTestRunner.runAllTests();
     }
 
     return returnValue;

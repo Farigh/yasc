@@ -55,8 +55,8 @@ while read -r test_line; do
         current_test_name=$(echo ${test_line} | sed "s/^Test: ${current_suite_name}:://")
         echo "** Running test ${CYAN}${current_test_name}${RESET_COLOR}"
 
-        # Actually run the test (add left-padding on the output)
-        $unit_test_runtime "${unit_test_resources_path}" "${current_suite_name}::${current_test_name}" | sed "s/^/    /g"
+        # Actually run the test (add left-padding on the output using sed)
+        $unit_test_runtime -r "${unit_test_resources_path}" -t "${current_suite_name}::${current_test_name}" | sed "s/^/    /g"
         return_value=${PIPESTATUS[0]}
 
         # Check return value
