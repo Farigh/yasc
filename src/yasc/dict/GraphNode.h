@@ -39,11 +39,12 @@ public:
 
     /**
      * @brief This function tries to follow the @p moveType transition
+     *
      * @param transitionType the transition type to follow
-     * @return returns the destiantion node if the transition exists,
+     * @return returns the destination node if the transition exists,
      *         nullptr otherwhise
      */
-    Ptr TryFollow(KeyType transitionType)
+    Ptr TryFollow(const KeyType& transitionType)
     {
         Ptr result = nullptr;
         if (_transitions.find(transitionType) != _transitions.end())
@@ -55,21 +56,54 @@ public:
     }
 
     /**
-     * @brief This function add a @p transitionType node
-     * @param transitionType the transition type to add
-     * @return returns the newly created node
+     * @brief This function adds a transition if it does not exist, else follows it
+     *
+     * This function tries to follow the @p moveType transition.
+     * If it does not exist it creates it
+     *
+     * @param transitionType the transition type to follow
+     * @return returns the destination node
      */
-    Ptr AddTransition(KeyType transitionType)
+    Ptr FollowOrAdd(const KeyType& transitionType)
     {
-        Ptr result = std::make_shared<GraphNode<KeyType>>();
-
-        _transitions.insert({ transitionType, result });
+        Ptr result = TryFollow(transitionType);
+        if (result == nullptr)
+        {
+            result = AddTransition(transitionType);
+        }
 
         return result;
     }
 
     /**
+     * @brief This function add a @p transitionType node
+     *
+     * @param transitionType the transition type to add
+     * @return returns the newly created node
+     */
+    Ptr AddTransition(const KeyType& transitionType)
+    {
+        Ptr result = std::make_shared<GraphNode<KeyType>>();
+
+        AddTransitionToNode(transitionType, result);
+
+        return result;
+    }
+
+    /**
+     * @brief This function add a @p transitionType to an existing node
+     *
+     * @param transitionType the transition type to add
+     * @param destNode the destination node
+     */
+    void AddTransitionToNode(const KeyType& transitionType, Ptr destNode)
+    {
+        _transitions.insert({ transitionType, destNode });
+    }
+
+    /**
      * @brief This function sets wether the current node is an output of the graph
+     *
      * @param isOutput true if the node is an output, false otherwise
      */
     void SetOutput(const bool isOutput)
@@ -79,6 +113,7 @@ public:
 
     /**
      * @brief This function returns wether the current node is an output of the graph
+     *
      * @return returns true if the graph is an output, false otherwhise
      */
     bool IsOutput() const
@@ -88,6 +123,7 @@ public:
 
     /**
      * @brief This function create a string representing the current node
+     *
      * @return returns the constructed string
      */
     std::string toString(const std::string& padding = "") const

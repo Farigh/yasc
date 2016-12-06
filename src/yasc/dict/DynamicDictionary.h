@@ -28,10 +28,13 @@ class DynamicDictionary : public Dictionary
 public:
     DynamicDictionary();
 
-    ~DynamicDictionary() = default;
+    virtual ~DynamicDictionary() = default;
 
     bool addEntry(const std::string& entry) override;
     bool safeAddEntry(const std::string& entry) override;
+
+protected:
+    NodeType innerAddEntry(const std::string& entry);
 };
 
 } // namespace dict

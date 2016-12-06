@@ -32,26 +32,19 @@ DynamicDictionary::DynamicDictionary()
 
 /**
  * @brief This function adds an entry to the dictionary
+ *
  * @param entry the entry to add
- * @return returns true if the entry is valid, false otherwhise
+ * @return returns the output node of the added entry
  */
-bool DynamicDictionary::addEntry(const std::string& entry)
+DynamicDictionary::NodeType DynamicDictionary::innerAddEntry(const std::string& entry)
 {
-    bool isValidEntry = true;
-
     NodeType currentNode = _head;
     for (const char& c : entry)
     {
         // Convert to lower-case first
         const char currentChar = std::tolower(c, std::locale());
 
-        NodeType tmpNode = currentNode->TryFollow(currentChar);
-        if (tmpNode == nullptr)
-        {
-            tmpNode = currentNode->AddTransition(currentChar);
-        }
-
-        currentNode = tmpNode;
+        currentNode = currentNode->FollowOrAdd(currentChar);
     }
 
     // The last node added is the output
@@ -60,12 +53,26 @@ bool DynamicDictionary::addEntry(const std::string& entry)
         currentNode->SetOutput(true);
     }
 
-    return isValidEntry;
+    return currentNode;
+}
+
+/**
+ * @brief This function adds an entry to the dictionary
+ *
+ * @param entry the entry to add
+ * @return returns true if the entry is valid, false otherwhise
+ */
+bool DynamicDictionary::addEntry(const std::string& entry)
+{
+    innerAddEntry(entry);
+    return true;
 }
 
 /**
  * @brief This function does the exact same as @ref addEntry
+ *
  * Dynamic dictionary does not store any alphabet
+ *
  * @return returns true if the entry is valid, false otherwhise
  */
 bool DynamicDictionary::safeAddEntry(const std::string& entry)
