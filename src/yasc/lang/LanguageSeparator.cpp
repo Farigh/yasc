@@ -15,41 +15,43 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _DICTIONARY_H_
-# define _DICTIONARY_H_
+#include "LanguageSeparator.h"
 
-# include "GraphNode.h"
-
-# include <set>
+#include <locale>
 
 namespace yasc {
-namespace dict {
+namespace lang {
 
-class Dictionary
+LanguageSeparator::LanguageSeparator(const char value, const SurroundingTypes surrounding)
+    : Value(value), Surrounding(surrounding)
 {
-public:
-    using Ptr = std::shared_ptr<Dictionary>;
-    using NodeType = GraphNode<char>;
+}
 
-    // Keep the compiler from generating default ctor
-    Dictionary() = delete;
-    Dictionary(const std::set<char>& alphabet);
-    virtual ~Dictionary() = default;
 
-    virtual bool addEntry(const std::string& entry);
-    virtual bool safeAddEntry(const std::string& entry);
-    bool isExistingEntry(const std::string& entry);
+void LanguageSeparatorList::addSeparator(const char value, const LanguageSeparator::SurroundingTypes surrounding)
+{
+    _innerList.push_back(LanguageSeparator(value, surrounding));
+}
 
-    virtual std::string toString() const;
+LanguageSeparatorList::const_iterator LanguageSeparatorList::begin() const
+{
+    return cbegin();
+}
 
-protected:
-    NodeType::Ptr _head;
+LanguageSeparatorList::const_iterator LanguageSeparatorList::end() const
+{
+    return cend();
+}
 
-private:
-    const std::set<char>& _alphabet;
-};
+LanguageSeparatorList::const_iterator LanguageSeparatorList::cbegin() const
+{
+    return _innerList.cbegin();
+}
 
-} // namespace dict
+LanguageSeparatorList::const_iterator LanguageSeparatorList::cend() const
+{
+    return _innerList.cend();
+}
+
+} // namespace lang
 } // namespace yasc
-
-#endif /* !_DICTIONARY_H_ */

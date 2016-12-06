@@ -30,8 +30,12 @@ add_library(
     dict/DictionaryFactory.cpp
     dict/DynamicDictionary.cpp
 
+    # lang
+    lang/DelimitedLanguageRegister.cpp
+    lang/LanguageSeparator.cpp
+
     # utils
-    utils/YascOption.cpp
     utils/YascGetopts.cpp
+    utils/YascOption.cpp
 )
 

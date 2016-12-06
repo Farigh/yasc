@@ -15,9 +15,34 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef _DELIMITED_LANGUAGE_REGISTER_TEST_H_
+# define _DELIMITED_LANGUAGE_REGISTER_TEST_H_
 
-int main(void)
+# include <helpers/cppunit/CppUnitHelperMacrosWrapper.h>
+# include <yasc/lang/LanguageSeparator.h>
+
+namespace yasc {
+namespace tests {
+
+class DelimitedLanguageRegisterTest : public CppUnit::TestFixture
 {
-    // Don't do anything for now
-    return 0;
-}
+private:
+    CPPUNIT_TEST_SUITE(DelimitedLanguageRegisterTest);
+        CPPUNIT_TEST(AddEntityTest);
+        CPPUNIT_TEST(AddEntityComplexTest);
+    CPPUNIT_TEST_SUITE_END();
+
+public:
+    DelimitedLanguageRegisterTest();
+
+    void AddEntityTest();
+    void AddEntityComplexTest();
+
+private:
+    ::yasc::lang::LanguageSeparatorList _testSeparators;
+};
+
+} // namespace tests
+} // namespace yasc
+
+#endif /* !_DELIMITED_LANGUAGE_REGISTER_TEST_H_ */

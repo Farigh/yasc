@@ -32,6 +32,7 @@ class GraphNode
 public:
     using Ptr = std::shared_ptr<GraphNode<KeyType>>;
     using TransitionsType = std::unordered_map<KeyType, Ptr>;
+    using InnerKeyType = KeyType;
 
     GraphNode() : _isOutput(false) {}
 
@@ -124,6 +125,8 @@ public:
     /**
      * @brief This function create a string representing the current node
      *
+     * @param padding The line padding for indentation
+     *
      * @return returns the constructed string
      */
     std::string toString(const std::string& padding = "") const
@@ -157,6 +160,11 @@ public:
         }
 
         return resultFormater.str();
+    }
+
+    const TransitionsType& getTransitions() const
+    {
+        return _transitions;
     }
 
 private:
