@@ -29,7 +29,7 @@ class Dictionary
 {
 public:
     using Ptr = std::shared_ptr<Dictionary>;
-    using NodeType = GraphNode<char>::Ptr;
+    using NodeType = GraphNode<char>;
 
     // Keep the compiler from generating default ctor
     Dictionary() = delete;
@@ -43,7 +43,7 @@ public:
     std::string toString() const;
 
 protected:
-    NodeType _head;
+    NodeType::Ptr _head;
 
 private:
     const std::set<char>& _alphabet;

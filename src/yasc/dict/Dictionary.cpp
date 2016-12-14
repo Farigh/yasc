@@ -28,7 +28,7 @@ namespace dict {
  * @param alphabet the set of valid transition values
  */
 Dictionary::Dictionary(const std::set<char>& alphabet)
-    : _head(std::make_shared<GraphNode<char>>()),
+    : _head(std::make_shared<NodeType>()),
       _alphabet(alphabet)
 {
     // Head is always an output since an empty string is valid
@@ -48,7 +48,7 @@ bool Dictionary::addEntry(const std::string& entry)
 {
     bool isValidEntry = true;
 
-    NodeType currentNode = _head;
+    NodeType::Ptr currentNode = _head;
     for (const char& c : entry)
     {
         // Convert to lower-case first
@@ -115,13 +115,13 @@ bool Dictionary::isExistingEntry(const std::string& entry)
 {
     bool entryExists = true;
 
-    NodeType currentNode = _head;
+    NodeType::Ptr currentNode = _head;
     for (const char& c : entry)
     {
         // Convert to lower-case first
         const char currentChar = std::tolower(c, std::locale());
 
-        NodeType tmpNode = currentNode->TryFollow(currentChar);
+        NodeType::Ptr tmpNode = currentNode->TryFollow(currentChar);
         if (tmpNode == nullptr)
         {
             entryExists = false;

@@ -36,9 +36,9 @@ DynamicDictionary::DynamicDictionary()
  * @param entry the entry to add
  * @return returns the output node of the added entry
  */
-DynamicDictionary::NodeType DynamicDictionary::innerAddEntry(const std::string& entry)
+DynamicDictionary::NodeType::Ptr DynamicDictionary::innerAddEntry(const std::string& entry)
 {
-    NodeType currentNode = _head;
+    NodeType::Ptr currentNode = _head;
     for (const char& c : entry)
     {
         // Convert to lower-case first

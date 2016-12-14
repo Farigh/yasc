@@ -34,7 +34,7 @@ public:
     bool safeAddEntry(const std::string& entry) override;
 
 protected:
-    NodeType innerAddEntry(const std::string& entry);
+    NodeType::Ptr innerAddEntry(const std::string& entry);
 };
 
 } // namespace dict
