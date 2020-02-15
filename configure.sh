@@ -14,7 +14,13 @@ fi
 # Configure project
 cd $BUILD_DIR
 cmake -G "$CMAKE_GENERATOR" -DCMAKE_BUILD_TYPE=$BUILD_TYPE $CMAKE_OPTIONS ..
+cmake_result=$?
 cd -
+
+if [ $cmake_result -ne 0 ]; then
+    echo "Error: cmake generation failed, see above"
+    exit 1
+fi
 
 if [ $? -eq 0 ]; then
     echo "Project configured successfully."
