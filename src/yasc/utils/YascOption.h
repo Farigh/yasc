@@ -18,6 +18,7 @@
 #ifndef _YASC_OPTION_H_
 # define _YASC_OPTION_H_
 
+# include <functional>
 # include <memory>
 # include <string>
 # include <unordered_map>
