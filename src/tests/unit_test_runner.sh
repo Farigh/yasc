@@ -9,7 +9,7 @@ fi
 
 # Enable colors only is in interactive shell
 if [ -t 1 ]; then
-    RESET_COLOR=$(echo -e '\e[00m')
+    RESET_COLOR=$(echo -e '\e[0m')
     LIGHT_RED=$(echo -e '\e[1;31m')
     LIGHT_GREEN=$(echo -e '\e[1;32m')
     PURPLE=$(echo -e '\e[0;35m')
